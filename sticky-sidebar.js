@@ -45,6 +45,7 @@ Sticky.prototype.updateColumn = function() {
 	var tooBig = this.elemValues.height > window.innerHeight,
 		tooSmall = !tooBig;
 
+	this.windowH = document.documentElement.clientHeight;
 	this.needTopFix = this.stikWrapper.getBoundingClientRect().top <= 0;
 
 	var st = window.pageYOffset;
