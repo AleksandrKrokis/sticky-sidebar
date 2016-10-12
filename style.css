@@ -1,0 +1,7 @@
+.fixed{
+	position: fixed;
+}
+.stik-wrap {
+	float: left;
+	width: 0;
+}
