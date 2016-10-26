@@ -27,11 +27,14 @@ Sticky.prototype.init = function() {
 
 	this.initWrapper(this.elem, this.stikWrapper);
 
+	this.tooBig = this.elemValues.height > window.innerHeight,
+	this.tooSmall = !this.tooBig;
+
 	$(window).on('scroll', function() {
 		this.updateColumn();
 	}.bind(this));
 
-	if (this.elemValues.height > window.innerHeight) {
+	if (this.tooBig) {
 		this.onScrollDown();
 	} else {
 		if (this.needTopFix) {
@@ -40,16 +43,15 @@ Sticky.prototype.init = function() {
 			this.static();
 		}
 	}
+
 };
 Sticky.prototype.updateColumn = function() {
-	var tooBig = this.elemValues.height > window.innerHeight,
-		tooSmall = !tooBig;
 
 	this.windowH = document.documentElement.clientHeight;
-	this.needTopFix = this.stikWrapper.getBoundingClientRect().top <= 0;
+	this.needTopFix = this.stikWrapper.getBoundingClientRect().top < 0;
 
 	var st = window.pageYOffset;
-	if (tooBig) { // если высота блока больше высоты вьюпорта
+	if (this.tooBig) { // если высота блока больше высоты вьюпорта
 		if (st > this.lastScrollingValue){
 			this.onScrollDown();
 		} else {
@@ -57,7 +59,7 @@ Sticky.prototype.updateColumn = function() {
 			this.onScrollUp();
 		}
 	}
-	if (tooSmall){ // если высота блока меньше высоты вьюпорта
+	if (this.tooSmall){ // если высота блока меньше высоты вьюпорта
 		if (this.needTopFix) {
 			this.fixedTop();
 		} else {
