@@ -16,9 +16,6 @@ function Sticky(elem, settings) {
 	this.fixedBt = false;
 	this.fixedTp = false;
 	this.staticBt = false;
-	this.needTopFix = this.stikWrapper.getBoundingClientRect().top <= 0;
-	this.botVisible = this.elem.getBoundingClientRect().bottom <= this.windowH;
-	this.outOfParent = this.parent.getBoundingClientRect().bottom <= this.elem.getBoundingClientRect().bottom
 
 	this.init();
 }
@@ -27,6 +24,10 @@ Sticky.prototype.init = function() {
 
 	this.initWrapper(this.elem, this.stikWrapper);
 
+	this.needTopFix = this.stikWrapper.getBoundingClientRect().top <= 0;
+	this.botVisible = this.elem.getBoundingClientRect().bottom <= this.windowH;
+	this.outOfParent = this.parent.getBoundingClientRect().bottom <= this.elem.getBoundingClientRect().bottom
+	
 	this.tooBig = this.elemValues.height > window.innerHeight,
 	this.tooSmall = !this.tooBig;
 
